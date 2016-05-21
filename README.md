@@ -19,11 +19,12 @@ $auth->_onEvent('login_completed', function ($response) //will be called on logg
 	}
 });
 
-$auth->login(function ($credentials, $callback) { // login function. Here you query yor database and return the response!
-  $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
-  $stmt->execute([
-    ':username' => $credentials['username']
-  ]);
+$auth->login(function ($credentials, $callback) { 
+  	// login function. Here you query yor database and return the response!
+  	$stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+  	$stmt->execute([
+    		':username' => $credentials['username']
+ 	]);
   
 	$callback(null, $stmt->fetch()); // wait for the "login_completed" event.
 });
