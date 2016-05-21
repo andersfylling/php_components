@@ -7,3 +7,4 @@
  */
 
 require_once 'Events.php';
+require_once 'Http.php';
