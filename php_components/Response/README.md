@@ -37,3 +37,17 @@ Keep-Alive:timeout=5, max=99
 Server:Apache/2.4.18 (Unix) OpenSSL/1.0.2g PHP/7.0.4 mod_perl/2.0.8-dev Perl/v5.16.3
 X-Powered-By:PHP/7.0.4
 ```
+
+##Q & A
+
+Q: The file is rather large, is it slow?
+A: If the response time is above 6-10ms on localhost (on my machine ofc), I rethink how I've written the code.
+
+Q: Does this support streaming?
+A: Not yet, sorry.
+
+Q: Why did you create this?
+A: I tend to have bad habbits when I exams are closing in, so I just try to make stuff.
+
+Q: How can this be used in php 5.6?
+A: Just remove the type hinting for each parameter.
