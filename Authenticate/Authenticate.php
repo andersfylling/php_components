@@ -45,7 +45,7 @@ class Authenticate
      *  values of keys specified in the parameter.
      *
      * @param array $keys
-     * @param string $method
+     * @param string &$method
      * @param string $fieldname
      * @param string $eventName
      * @return string or exit() on event firing.

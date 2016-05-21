@@ -2,13 +2,15 @@
 
 /**
  * JUST FOR TESTING WHILE IM CREATING THE COMPONENTS!
- * /
+ */
 
 echo '<pre>';
 
 require 'php_components_essentials/bootstrap.php';
 
 require 'Authenticate/Authenticate.php';
+require 'Response/Response.php';
+
 
 /*
 $time   = microtime(true);
@@ -29,18 +31,21 @@ print_r(array(
 
 */
 
+
+
+$user = [];
+$auth = new \php_components\Authenticate($user);
+$response = new \php_components\Response();
+
+
 $errorResponse = function ($message)
 {
     var_dump($message);
 };
-$successResponse = function ($message)
+$successResponse = function ($message) use ($response)
 {
-    var_dump($message);
+    $response->json($message);
 };
-
-$user = [];
-$auth = new php_components\Authenticate($user);
-
 /**
  * Events must be set before using public methods for them to be called!!
  * 
