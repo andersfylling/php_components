@@ -1,6 +1,32 @@
 ##Authenticate class##
 ####For authenticating users faster####
 
+It's rather simple to login someone!
+```php
+$user = [];
+$auth = new \php_components\Authenticate($user);
+
+$auth->_onEvent('completed', function ($response) { //will be called on logged in.
+	if ($response[0] === 200)
+	{
+		$_SESSION['user'] = $user; // save user to session or something.
+	}
+	else
+	{
+		echo $response[1]; //wrong username or password, and a 403 error code at [0]
+	}
+});
+
+$auth->login(function ($credentials, $callback) { // login function. Here you query yor database and return the response!
+	$callback(null, ['password' => 'something']); // wait for the "completed" event.
+});
+
+```
+That's it!
+
+
+A little more details here.
+
 ```php
 $user 		= []; 			// To be updated on successfull registering or logging in.
 $csrfToken 	= '...';		// a CSRF Token if you have one, Optional.
