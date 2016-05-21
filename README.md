@@ -30,3 +30,11 @@ $auth->login(function ($credentials, $callback) {
 });
 
 ```
+
+Perhaps you wish to send some data, may it be text, html file, json.
+No more need to worry abour correct headers, content length, content type,
+Response even handles allowed request methods for you by default!
+```php
+$json_array = ['name' => 'anders'];
+$response->json($json_array, 200 /* http code */);
+```
