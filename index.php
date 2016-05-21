@@ -4,12 +4,11 @@
  * JUST FOR TESTING WHILE IM CREATING THE COMPONENTS!
  */
 
-echo '<pre>';
 
 require 'php_components_essentials/bootstrap.php';
 
-require 'Authenticate/Authenticate.php';
-require 'Response/Response.php';
+require 'php_components/Authenticate/Authenticate.php';
+require 'php_components/Response/Response.php';
 
 
 /*
@@ -38,9 +37,9 @@ $auth = new \php_components\Authenticate($user);
 $response = new \php_components\Response();
 
 
-$errorResponse = function ($message)
+$errorResponse = function ($message) use ($response)
 {
-    var_dump($message);
+    $response->json($message);
 };
 $successResponse = function ($message) use ($response)
 {
@@ -85,6 +84,7 @@ $auth->login(function ($credentials, $callback) {
 
 echo
 '
+<pre>
 <form method="post">
 <input name="email" placeholder="email" value="rft43">
 <input name="password" placeholder="password" value="p4ionf3">
