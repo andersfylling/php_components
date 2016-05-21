@@ -11,7 +11,8 @@ With this I'm trying to let inexperienced scripters or people tired of writing t
 $user = [];
 $auth = new \php_components\Authenticate($user); //passed as a reference
 
-$auth->_onEvent('login_completed', function ($response) //will be called on logged in.
+// Runs when login completed
+$auth->_onEvent('login_completed', function ($response)
 { 
 	if ($response[0] === 200)
 	{
@@ -19,6 +20,7 @@ $auth->_onEvent('login_completed', function ($response) //will be called on logg
 	}
 });
 
+// method for logging a user in, before "login_completed" event.
 $auth->login(function ($credentials, $callback) { 
   	// login function. Here you query yor database and return the response!
   	$stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
