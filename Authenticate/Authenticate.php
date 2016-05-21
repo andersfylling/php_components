@@ -41,7 +41,7 @@ class Authenticate
     }
 
     /**
-     * Log in a user.
+     * Log in a user. The user object is only filled with info on success.
      *
      * @event error     emptyField      One of the form fields are empty.
      * @event error     emptyFields     POST was empty.
@@ -165,10 +165,13 @@ class Authenticate
              * successfully found username, now.. how to match password..?
              *
              * TODO: find a better way to match passwords..
+             * TODO: Res might also be an multidimensional array..
              */
-            else if ($res['password'] === $this->credentials['password'])
+            else if ($res['password'] === $this->credentials['password']) //this is just awful..
             {
                 $response = [200, 'Successfully logged in.'];
+
+                $this->user = $res; //might be multidimensional..
             }
 
             /**
