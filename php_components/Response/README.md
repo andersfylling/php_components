@@ -50,11 +50,6 @@ Q: Does this support streaming?
 A: Not yet, sorry.
 
 
-Q: Why did you create this?
-
-A: I tend to have bad habbits when I exams are closing in, so I just try to make stuff.
-
-
 Q: How can this be used in php 5.6?
 
 A: Just remove the type hinting for each parameter.
