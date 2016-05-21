@@ -36,5 +36,17 @@ No more need to worry abour correct headers, content length, content type,
 Response even handles allowed request methods for you by default!
 ```php
 $json_array = ['name' => 'anders'];
-$response->json($json_array, 200 /* http code */);
+$response->json($json_array);
+
+RESPONSE HEADERS
+Access-Control-Allow-Credentials:true
+Access-Control-Allow-Methods:GET, HEAD, POST, PUT, DELETE
+Cache-Control:public, max-age=0, no-cache
+Connection:Keep-Alive
+Content-Length:31
+Content-Type:application/json; charset: UTF-8
+Date:Sat, 21 May 2016 05:44:18 GMT
+Keep-Alive:timeout=5, max=99
+Server:Apache/2.4.18 (Unix) OpenSSL/1.0.2g PHP/7.0.4 mod_perl/2.0.8-dev Perl/v5.16.3
+X-Powered-By:PHP/7.0.4
 ```
