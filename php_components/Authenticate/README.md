@@ -6,7 +6,7 @@ It's rather simple to login someone!
 $user = [];
 $auth = new \php_components\Authenticate($user);
 
-$auth->_onEvent('completed', function ($response) { //will be called on logged in.
+$auth->_onEvent('login_completed', function ($response) { //will be called on logged in.
 	if ($response[0] === 200)
 	{
 		$_SESSION['user'] = $user; // save user to session or something.
@@ -42,7 +42,7 @@ $auth = new \php_components\Authenticate($user, $csrfToken, $config);
 $auth->_onEvent('*', function ($response) {  // handle all events thats not specified..
 	var_dump($response); 
 });
-$auth->_onEvent('completed', function ($response) {
+$auth->_onEvent('login_completed', function ($response) {
 	// Login completed. Either the username / password was incorrect or login was successfull.
 	var_dump($response);
 });
