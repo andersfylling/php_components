@@ -6,7 +6,7 @@ Different php scripts to speed up your programming time.
 With this I'm trying to let inexperienced scripters or people tired of writing the same script over and over again, to spend less time by using my classes. Hopefully you'll get more time on scripts that matters for you, rather than these old usual ones.
 
 
-Example of loging a user in:
+#### Authenticating a user login
 ```php
 $user = [];
 $auth = new \php_components\Authenticate($user); //passed as a reference
@@ -31,7 +31,9 @@ $auth->login(function ($credentials, $callback) {
 
 ```
 
+#### Sending a response
 Perhaps you wish to send some data, may it be text, html file, json.
+
 No more need to worry abour correct headers, content length, content type,
 Response even handles allowed request methods for you by default!
 ```php
