@@ -1,5 +1,5 @@
 ##Authenticate class##
-####For authenticating users faster####
+#####For authenticating users with less code
 
 It's rather simple to login someone!
 ```php
