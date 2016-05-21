@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * JUST FOR TESTING WHILE IM CREATING THE COMPONENTS!
+ * /
+
 echo '<pre>';
 
 require 'php_components_essentials/bootstrap.php';
