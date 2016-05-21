@@ -64,7 +64,7 @@ $auth->_onEvent('match',        $successResponse);
 $auth->_onEvent('*',        $errorResponse);
 $auth->_onEvent('match',    $successResponse);
 */
-$auth->_onEvent('completed', $successResponse);
+$auth->_onEvent('login_completed', $successResponse);
 
 $auth->login(function ($credentials, $callback) {
     /**

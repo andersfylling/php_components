@@ -55,9 +55,14 @@ class Authenticate
         array   $keys,
         array   &$method, // might be LOADS of data here so make it a reference not a copy!
         string  $fieldname,
-        string  $eventName = 'emptyField'
+        string  $eventName = '_emptyField'
     )
     {
+        if ($eventName !== '_emptyField')
+        {
+            $eventName .= '_emptyField';
+        }
+
         /**
          * Loop through set keys, set $len to -1 if no matching keys were found.
          */
@@ -105,12 +110,13 @@ class Authenticate
         array       $keys_csrf          = ['csrf',      'csrftoken',    'token'     ]
     )
     {
+        $eventPrefix = 'login_';
         /**
          * Make sure it's an POST request!
          */
         if ($this->config['ajax'] && $_SERVER['REQUEST_METHOD'] !== 'POST')
         {
-            $this->triggerEvent('error', [403, 'Must be a post request']);
+            $this->triggerEvent($eventPrefix . 'error', [403, 'Must be a post request']);
         }
 
         /**
@@ -121,7 +127,7 @@ class Authenticate
          */
         if ($this->config['ajax'] && empty($_POST) === true)
         {
-            $this->triggerEvent('error', [403, 'POST cannot be empty!']);
+            $this->triggerEvent($eventPrefix . 'error', [403, 'POST cannot be empty!']);
         }
         else if (empty($_POST) === true)
         {
@@ -136,27 +142,28 @@ class Authenticate
          */
         if ($this->tokens['csrf'] !== $this->getRequestBody($keys_csrf, $_POST, 'csrf'))
         {
-            $this->triggerEvent('error', [403, 'Wrong csrf token.']);
+            $this->triggerEvent($eventPrefix . 'error', [403, 'Wrong csrf token.']);
         }
 
         /**
          * Get username as username | email | login,
          *  password as password | pwd | logintoken,
          */
-        $this->credentials['username']  = $this->getRequestBody($keys_username, $_POST, 'username');
-        $this->credentials['password']  = $this->getRequestBody($keys_password, $_POST, 'password');
+        $this->credentials['username']  = $this->getRequestBody($keys_username, $_POST, 'username', $eventPrefix);
+        $this->credentials['password']  = $this->getRequestBody($keys_password, $_POST, 'password', $eventPrefix);
 
         /**
          * Do a callback to let the user find search results from
          *  their database.
          */
-        $lookup($this->credentials, function ($err = null, $res = []) {
+        $lookup($this->credentials, function ($err = null, $res = []) use ($eventPrefix)
+        {
             /**
              * Handle lookup error.
              */
             if ($err != null)
             {
-                $this->triggerEvent('error', [500, $err]);
+                $this->triggerEvent($eventPrefix . 'error', [500, $err]);
             }
 
             $response = [403, 'Wrong username or password.'];
@@ -184,7 +191,7 @@ class Authenticate
             /**
              * Fire last event "completed".
              */
-            $this->triggerEvent('completed', $response);
+            $this->triggerEvent($eventPrefix . 'completed', $response);
         });
     } // login method ends here.
 
@@ -212,12 +219,13 @@ class Authenticate
         array       $keys_csrf          = ['csrf',      'csrftoken',    'token'     ]
     )
     {
+        $eventPrefix = 'register_';
         /**
          * Make sure it's an POST request!
          */
         if ($this->config['ajax'] && $_SERVER['REQUEST_METHOD'] !== 'POST')
         {
-            $this->triggerEvent('error', [403, 'Must be a post request']);
+            $this->triggerEvent($eventPrefix . 'error', [403, 'Must be a post request']);
         }
 
         /**
@@ -228,7 +236,7 @@ class Authenticate
          */
         if ($this->config['ajax'] && empty($_POST) === true)
         {
-            $this->triggerEvent('error', [403, 'POST cannot be empty!']);
+            $this->triggerEvent($eventPrefix . 'error', [403, 'POST cannot be empty!']);
         }
         else if (empty($_POST) === true)
         {
@@ -243,15 +251,15 @@ class Authenticate
          */
         if ($this->tokens['csrf'] !== $this->getRequestBody($keys_csrf, $_POST, 'csrf'))
         {
-            $this->triggerEvent('error', [403, 'Wrong csrf token.']);
+            $this->triggerEvent($eventPrefix . 'error', [403, 'Wrong csrf token.']);
         }
 
         /**
          * Get username as username | email | login,
          *  password as password | pwd | logintoken,
          */
-        $this->credentials['username']  = $this->getRequestBody($keys_username, $_POST, 'username');
-        $this->credentials['password']  = $this->getRequestBody($keys_password, $_POST, 'password');
+        $this->credentials['username']  = $this->getRequestBody($keys_username, $_POST, 'username', $eventPrefix);
+        $this->credentials['password']  = $this->getRequestBody($keys_password, $_POST, 'password', $eventPrefix);
 
         /**
          * After credentials are validated, set it to user.
@@ -261,6 +269,6 @@ class Authenticate
         /**
          * Fire last event "completed".
          */
-        $this->triggerEvent('completed', [200, 'Successfully registered!']);
+        $this->triggerEvent($eventPrefix . 'completed', [200, 'Successfully registered!']);
     } // register method ends here.
 }
