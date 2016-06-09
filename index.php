@@ -10,25 +10,23 @@ require 'php_components_essentials/bootstrap.php';
 require 'php_components/Authenticate/Authenticate.php';
 require 'php_components/Response/Response.php';
 
+echo '<pre>';
+$asd = 'kglhug43g54';
 
-/*
 $time   = microtime(true);
 $mem    = memory_get_usage();
 
-$user = [];
-$login = new php_components\login($user);
+$s = "";
 
 $i = 0;
-//while (++$i <= 1000000)
-//    $login->getCredentials();
-print_r($_POST);
+while (++$i <= 100000)
+    echo 'lksdjflsdjfds ', $asd, PHP_EOL;
 
 print_r(array(
     'memory' => (memory_get_usage() - $mem) / (1024 * 1024),
     'seconds' => microtime(TRUE) - $time
 ));
 
-*/
 
 
 
